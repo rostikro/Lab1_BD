@@ -1,5 +1,5 @@
 CREATE TABLE `users` (
-  `Id` varchar(255) PRIMARY KEY,
+  `Id` int PRIMARY KEY AUTO_INCREMENT,
   `Username` varchar(255),
   `Email` varchar(255),
   `Password` varchar(255),
@@ -7,8 +7,8 @@ CREATE TABLE `users` (
 );
 
 CREATE TABLE `addresses` (
-  `Id` int PRIMARY KEY,
-  `UserId` varchar(255),
+  `Id` int PRIMARY KEY AUTO_INCREMENT,
+  `UserId` int,
   `Street` varchar(255),
   `Apartment` varchar(255),
   `City` varchar(255),
@@ -20,61 +20,61 @@ CREATE TABLE `addresses` (
 );
 
 CREATE TABLE `products` (
-  `Id` int PRIMARY KEY,
+  `Id` int PRIMARY KEY AUTO_INCREMENT,
   `CategoryId` int,
   `Name` varchar(255),
   `Price` int,
   `Description` varchar(255),
   `Stock` int,
-  `ModifiedBy` varchar(255),
+  `ModifiedBy` int,
   `ModifiedAt` timestamp,
   `IsDeleted` bool
 );
 
 CREATE TABLE `product_categories` (
-  `Id` int PRIMARY KEY,
+  `Id` int PRIMARY KEY AUTO_INCREMENT,
   `Name` varchar(255),
-  `ModifiedBy` varchar(255),
+  `ModifiedBy` int,
   `ModifiedAt` timestamp,
   `IsDeleted` bool
 );
 
 CREATE TABLE `product_images` (
-  `Id` int PRIMARY KEY,
+  `Id` int PRIMARY KEY AUTO_INCREMENT,
   `ProductId` int,
   `Url` varchar(255),
-  `ModifiedBy` varchar(255),
+  `ModifiedBy` int,
   `ModifiedAt` timestamp,
   `IsDeleted` bool
 );
 
 CREATE TABLE `specs` (
-  `Id` int PRIMARY KEY,
+  `Id` int PRIMARY KEY AUTO_INCREMENT,
   `CategoryId` int,
   `Name` varchar(255),
-  `ModifiedBy` varchar(255),
+  `ModifiedBy` int,
   `ModifiedAt` timestamp,
   `IsDeleted` bool
 );
 
 CREATE TABLE `specs_options` (
-  `Id` int PRIMARY KEY,
+  `Id` int PRIMARY KEY AUTO_INCREMENT,
   `SpecId` int,
   `ProductId` int,
   `Value` varchar(255),
-  `ModifiedBy` varchar(255),
+  `ModifiedBy` int,
   `ModifiedAt` timestamp,
   `IsDeleted` bool
 );
 
 CREATE TABLE `shopping_carts` (
-  `Id` int PRIMARY KEY,
-  `UserId` varchar(255),
+  `Id` int PRIMARY KEY AUTO_INCREMENT,
+  `UserId` int,
   `IsDeleted` bool
 );
 
 CREATE TABLE `shopping_cart_products` (
-  `Id` int PRIMARY KEY,
+  `Id` int PRIMARY KEY AUTO_INCREMENT,
   `CartId` int,
   `ProductId` int,
   `Quantity` int,
@@ -82,8 +82,8 @@ CREATE TABLE `shopping_cart_products` (
 );
 
 CREATE TABLE `orders` (
-  `Id` int PRIMARY KEY,
-  `UserId` varchar(255),
+  `Id` int PRIMARY KEY AUTO_INCREMENT,
+  `UserId` int,
   `OrderDate` date,
   `Total` int,
   `StatusId` int,
@@ -91,13 +91,13 @@ CREATE TABLE `orders` (
 );
 
 CREATE TABLE `order_statuses` (
-  `Id` int PRIMARY KEY,
+  `Id` int PRIMARY KEY AUTO_INCREMENT,
   `Status` varchar(255),
   `IsDeleted` bool
 );
 
 CREATE TABLE `order_products` (
-  `Id` int PRIMARY KEY,
+  `Id` int PRIMARY KEY AUTO_INCREMENT,
   `OrderId` int,
   `ProductId` int,
   `Price` int,
@@ -106,7 +106,7 @@ CREATE TABLE `order_products` (
 );
 
 CREATE TABLE `shipping_info` (
-  `Id` int PRIMARY KEY,
+  `Id` int PRIMARY KEY AUTO_INCREMENT,
   `OrderId` int,
   `Street` varchar(255),
   `Apartment` varchar(255),
@@ -118,20 +118,20 @@ CREATE TABLE `shipping_info` (
 );
 
 CREATE TABLE `roles` (
-  `Id` varchar(255) PRIMARY KEY,
+  `Id` int PRIMARY KEY AUTO_INCREMENT,
   `Name` varchar(255),
-  `ModifiedBy` varchar(255),
+  `ModifiedBy` int,
   `ModifiedAt` timestamp,
   `IsDeleted` bool
 );
 
 CREATE TABLE `users_roles` (
-  `UserId` varchar(255),
-  `RoleId` varchar(255),
-  `ModifiedBy` varchar(255),
+  `UserId` int,
+  `RoleId` int,
+  `ModifiedBy` int,
   `ModifiedAt` timestamp,
   `IsDeleted` bool,
-  PRIMARY KEY (`UserId`, `RoleId`)
+  PRIMARY KEY AUTO_INCREMENT (`UserId`, `RoleId`)
 );
 
 ALTER TABLE `addresses` ADD FOREIGN KEY (`UserId`) REFERENCES `users` (`Id`);
